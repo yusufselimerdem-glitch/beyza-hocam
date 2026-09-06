@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>A Special Performance</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            background: #090909;
+            color: #f5f5f5;
+            font-family: Georgia, "Times New Roman", serif;
+            overflow-x: hidden;
+        }
+
+        /* =========================
+           OPENING
+        ========================== */
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 30px;
+            position: relative;
+
+            background:
+                radial-gradient(
+                    circle at center,
+                    rgba(120, 0, 0, 0.22),
+                    transparent 45%
+                ),
+                linear-gradient(
+                    to bottom,
+                    #050505,
+                    #111111
+                );
+        }
+
+        .hero::before,
+        .hero::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            width: 18%;
+            height: 100%;
+
+            background:
+                linear-gradient(
+                    to right,
+                    #320000,
+                    #7a0000,
+                    #2a0000
+                );
+
+            box-shadow:
+                0 0 40px rgba(0, 0, 0, 0.8);
+        }
+
+        .hero::before {
+            left: 0;
+            border-right: 4px solid #8b6a2f;
+        }
+
+        .hero::after {
+            right: 0;
+            border-left: 4px solid #8b6a2f;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 850px;
+            animation: fadeIn 2s ease;
+        }
+
+        .small-title {
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            font-size: 14px;
+            color: #c9a85c;
+            margin-bottom: 22px;
+        }
+
+        h1 {
+            font-size: clamp(38px, 7vw, 82px);
+            margin: 0;
+            font-weight: normal;
+            line-height: 1.1;
+        }
+
+        .quote {
+            margin-top: 28px;
+            font-size: clamp(20px, 3vw, 30px);
+            color: #dddddd;
+            font-style: italic;
+            line-height: 1.5;
+        }
+
+        .gold-line {
+            width: 90px;
+            height: 2px;
+            background: #c9a85c;
+            margin: 32px auto;
+        }
+
+        .message {
+            font-size: 18px;
+            color: #bdbdbd;
+            line-height: 1.7;
+        }
+
+        .enter-btn {
+            display: inline-block;
+            margin-top: 35px;
+            padding: 14px 30px;
+
+            border: 1px solid #c9a85c;
+            color: #f5f5f5;
+            text-decoration: none;
+
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 13px;
+
+            transition: 0.3s ease;
+        }
+
+        .enter-btn:hover {
+            background: #c9a85c;
+            color: #090909;
+        }
+
+        /* =========================
+           ACT SECTIONS
+        ========================== */
+
+        .act-section {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 90px 25px;
+            text-align: center;
+        }
+
+        .act-content {
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        .act-number {
+            color: #c9a85c;
+            font-size: 14px;
+            letter-spacing: 6px;
+            margin-bottom: 15px;
+        }
+
+        .act-title {
+            font-size: clamp(40px, 6vw, 68px);
+            font-weight: normal;
+            margin: 0 0 20px;
+        }
+
+        .act-description {
+            color: #bdbdbd;
+            font-size: 20px;
+            line-height: 1.7;
+            margin: 0 auto 40px;
+            max-width: 720px;
+        }
+
+        .archive-note {
+            margin-top: 20px;
+            font-size: 13px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #777;
+        }
+
+        /* =========================
+           ACT I - SHERLOCK
+        ========================== */
+
+        .sherlock {
+            background:
+                radial-gradient(
+                    circle at top,
+                    rgba(100, 0, 0, 0.15),
+                    transparent 40%
+                ),
+                #101010;
+        }
+
+        /* =========================
+           ACT II - HAMLET
+        ========================== */
+
+        .hamlet {
+            background:
+                radial-gradient(
+                    circle at center,
+                    rgba(70, 70, 70, 0.18),
+                    transparent 45%
+                ),
+                linear-gradient(
+                    to bottom,
+                    #101010,
+                    #050505
+                );
+        }
+
+        .hamlet-symbol {
+            font-size: 26px;
+            margin-bottom: 25px;
+            color: #999;
+        }
+
+        /* =========================
+           ACT III - MACBETH
+        ========================== */
+
+        .macbeth {
+            background:
+                radial-gradient(
+                    circle at center,
+                    rgba(130, 0, 0, 0.22),
+                    transparent 45%
+                ),
+                linear-gradient(
+                    to bottom,
+                    #050505,
+                    #130000
+                );
+        }
+
+        .turning-point {
+            font-size: 18px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #c9a85c;
+            margin-bottom: 20px;
+        }
+
+        /* =========================
+           VIDEO
+        ========================== */
+
+        .video-frame {
+            padding: 10px;
+            border: 1px solid #8b6a2f;
+            background: #050505;
+
+            box-shadow:
+                0 20px 60px rgba(0, 0, 0, 0.7);
+
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .video-frame video {
+            display: block;
+            width: 100%;
+            max-height: 70vh;
+            background: black;
+        }
+
+        .video-frame iframe {
+            display: block;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            height: auto;
+            border: 0;
+            background: black;
+        }
+
+        /* =========================
+           PHOTO
+        ========================== */
+
+        .photo-frame {
+            padding: 10px;
+            border: 1px solid #777;
+            background: #050505;
+
+            box-shadow:
+                0 25px 70px rgba(0, 0, 0, 0.85);
+
+            max-width: 900px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .photo-frame img {
+            display: block;
+            width: 100%;
+            height: auto;
+            max-height: 70vh;
+            object-fit: contain;
+
+            filter:
+                brightness(0.9)
+                contrast(1.05);
+
+            transition:
+                transform 5s ease,
+                filter 1s ease;
+        }
+
+        .photo-frame:hover img {
+            transform: scale(1.025);
+
+            filter:
+                brightness(1)
+                contrast(1.05);
+        }
+
+        /* =========================
+           DIVIDERS
+        ========================== */
+
+        .act-divider {
+            height: 1px;
+            width: 70%;
+            max-width: 600px;
+            margin: 0 auto;
+
+            background:
+                linear-gradient(
+                    to right,
+                    transparent,
+                    #8b6a2f,
+                    transparent
+                );
+        }
+
+        /* =========================
+           CURTAIN CALL
+        ========================== */
+
+        .curtain-call {
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+
+            padding: 100px 25px;
+
+            background:
+                radial-gradient(
+                    circle at center,
+                    rgba(110, 0, 0, 0.14),
+                    transparent 38%
+                ),
+                linear-gradient(
+                    to bottom,
+                    #090000,
+                    #020202 45%,
+                    #000000
+                );
+        }
+
+        .curtain-content {
+            max-width: 800px;
+            width: 100%;
+            animation: fadeIn 2s ease;
+        }
+
+        .curtain-label {
+            color: #c9a85c;
+
+            text-transform: uppercase;
+
+            letter-spacing: 7px;
+            font-size: 14px;
+
+            margin-bottom: 25px;
+        }
+
+        .curtain-title {
+            font-size: clamp(42px, 7vw, 80px);
+            font-weight: normal;
+
+            margin: 0 0 35px;
+        }
+
+        .final-message {
+            font-size: 19px;
+            line-height: 1.9;
+            color: #d0d0d0;
+
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .final-message p {
+            margin: 0 0 24px;
+        }
+
+        .final-message .memory-line {
+            color: #f0f0f0;
+            font-style: italic;
+        }
+
+        .final-message .important-line {
+            font-size: 22px;
+            color: #ffffff;
+        }
+
+        .birthday {
+            margin-top: 55px;
+
+            font-size:
+                clamp(32px, 5vw, 58px);
+
+            font-weight: normal;
+
+            color: #f5f5f5;
+        }
+
+        .final-quote {
+            margin-top: 25px;
+
+            font-style: italic;
+
+            color: #9b9b9b;
+
+            font-size: 17px;
+        }
+
+        .final-symbol {
+            margin-top: 35px;
+            font-size: 34px;
+            color: #c9a85c;
+        }
+
+        /* =========================
+           ANIMATION
+        ========================== */
+
+        @keyframes fadeIn {
+
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* =========================
+           MOBILE
+        ========================== */
+
+        @media (max-width: 700px) {
+
+            .hero::before,
+            .hero::after {
+                width: 10%;
+            }
+
+            .hero {
+                padding-left: 50px;
+                padding-right: 50px;
+            }
+
+            .message {
+                font-size: 16px;
+            }
+
+            .act-section {
+                padding: 70px 15px;
+            }
+
+            .act-description {
+                font-size: 17px;
+            }
+
+            .video-frame,
+            .photo-frame {
+                padding: 5px;
+            }
+
+            .curtain-call {
+                padding: 80px 20px;
+            }
+
+            .final-message {
+                font-size: 17px;
+                line-height: 1.8;
+            }
+
+            .final-message .important-line {
+                font-size: 19px;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <!-- =========================
+         OPENING
+    ========================== -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <div class="small-title">
+                A Special Performance
+            </div>
+
+            <h1>
+                The Curtain Rises Again
+            </h1>
+
+            <div class="gold-line"></div>
+
+            <div class="quote">
+                “Keşke görebilseydim...”
+            </div>
+
+            <p class="message">
+                Hocam, bunu söylediğiniz günü unutmadım.
+                <br>
+                Bu yüzden geçmişte kalan birkaç sahneyi
+                yeniden perdeye taşımak istedim.
+            </p>
+
+            <a
+                href="#act1"
+                class="enter-btn"
+            >
+                Enter the Theatre
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         ACT I
+    ========================== -->
+
+    <section
+        id="act1"
+        class="act-section sherlock"
+    >
+
+        <div class="act-content">
+
+            <div class="act-number">
+                ACT I
+            </div>
+
+            <h2 class="act-title">
+                Sherlock & Watson
+            </h2>
+
+            <p class="act-description">
+                The first chapter of the story.
+                <br>
+                I stepped onto the stage as Watson.
+            </p>
+
+            <div class="video-frame">
+
+                <video
+                    controls
+                    preload="metadata"
+                    playsinline
+                >
+
+                    <source
+                        src="videos/Sherlock-final.mp4"
+                        type="video/mp4"
+                    >
+
+                    Tarayıcınız bu videoyu desteklemiyor.
+
+                </video>
+
+            </div>
+
+            <p class="archive-note">
+                From the Archives • 9th Grade
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <div class="act-divider"></div>
+
+
+    <!-- =========================
+         ACT II
+    ========================== -->
+
+    <section
+        id="act2"
+        class="act-section hamlet"
+    >
+
+        <div class="act-content">
+
+            <div class="act-number">
+                ACT II
+            </div>
+
+            <h2 class="act-title">
+                Hamlet
+            </h2>
+
+            <div class="hamlet-symbol">
+                ♛
+            </div>
+
+            <p class="act-description">
+                Another stage.
+                <br>
+                Another story.
+                <br>
+                And another memory from the years
+                before our paths crossed.
+            </p>
+
+            <div class="photo-frame">
+
+                <img
+                    src="images/Hamlet.jpg"
+                    alt="Hamlet theatre cast"
+                >
+
+            </div>
+
+            <p class="archive-note">
+                From the Archives • 10th Grade
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <div class="act-divider"></div>
+
+
+    <!-- =========================
+         ACT III
+    ========================== -->
+
+    <section
+        id="act3"
+        class="act-section macbeth"
+    >
+
+        <div class="act-content">
+
+            <div class="turning-point">
+                And Then, Our Paths Crossed
+            </div>
+
+            <div class="act-number">
+                ACT III
+            </div>
+
+            <h2 class="act-title">
+                Macbeth
+            </h2>
+
+            <p class="act-description">
+                This time, it was different.
+                <br>
+                This was no longer a memory from before.
+                <br>
+                This was a stage we shared.
+            </p>
+
+            <div class="video-frame">
+
+                <iframe
+                    src="https://www.youtube.com/embed/4UTQqcP8htQ"
+                    title="Macbeth • 11th Grade"
+                    allow="
+                        accelerometer;
+                        autoplay;
+                        clipboard-write;
+                        encrypted-media;
+                        gyroscope;
+                        picture-in-picture;
+                        web-share
+                    "
+                    allowfullscreen
+                >
+                </iframe>
+
+            </div>
+
+            <p class="archive-note">
+                A Chapter We Shared • 11th Grade
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         CURTAIN CALL
+    ========================== -->
+
+    <section class="curtain-call">
+
+        <div class="curtain-content">
+
+            <div class="curtain-label">
+                Curtain Call
+            </div>
+
+            <h2 class="curtain-title">
+                One Last Thing...
+            </h2>
+
+            <div class="gold-line"></div>
+
+            <div class="final-message">
+
+                <p>
+                    Hocam,
+                </p>
+
+                <p>
+                    Sizinle ilk tanıştığım andan itibaren,
+                    nedenini o zaman tam olarak açıklayamadığım
+                    bir samimiyet hissetmiştim.
+                </p>
+
+                <p>
+                    Sonra drama hayatımıza girdi.
+                </p>
+
+                <p>
+                    Birlikte çalıştıkça bunun nedenini biraz daha
+                    anlamaya başladım. Bazen verdiğimiz tepkilerin,
+                    bazen olaylara bakışımızın, bazen de kafa yapımızın
+                    ne kadar benzediğini fark ettim.
+                </p>
+
+                <p>
+                    Belki doğum günlerimizin yalnızca iki gün arayla
+                    olması ve ikimizin de Başak olması da küçük bir
+                    tesadüften fazlasıdır. :)
+                </p>
+
+                <div class="gold-line"></div>
+
+                <p class="memory-line">
+                    Bir gün eski dramalardan bahsederken
+                    “Keşke görebilseydim.” demiştiniz.
+                </p>
+
+                <p class="important-line">
+                    İlk iki perdeyi o zaman göremediniz.
+                </p>
+
+                <p class="important-line">
+                    Ama üçüncüsünde artık siz de vardınız.
+                </p>
+
+                <p class="important-line">
+                    Ve iyi ki vardınız.
+                </p>
+
+            </div>
+
+            <div class="birthday">
+                Happy Birthday, Beyza Hocam. 🎭
+            </div>
+
+            <div class="final-quote">
+                The curtain closes, but the memories remain.
+            </div>
+
+            <div class="final-symbol">
+                ✦
+            </div>
+
+        </div>
+
+    </section>
+
+</body>
+
+</html>
